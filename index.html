@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Maxwell-cat</title>
+    <style>
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: black;
+        transition: background 0.5s ease;
+      }
+
+      .disco {
+        background: linear-gradient(
+          45deg,
+          #ff0000,
+          #ff7300,
+          #fffb00,
+          #48ff00,
+          #00ffd5,
+          #002bff,
+          #7a00ff,
+          #ff00c8,
+          #ff0000
+        );
+        background-size: 400% 400%;
+        animation: discoGradient 10s ease infinite;
+      }
+
+      @keyframes discoGradient {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+      .gif-container {
+        text-align: center;
+        position: relative;
+        z-index: 1;
+      }
+      .gif-container img {
+        max-width: 100%;
+        max-height: 100vh;
+        cursor: pointer;
+      }
+      .title {
+        color: white;
+        margin: 1rem;
+        position: relative;
+        z-index: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="title" id="title">Click the cat!</h1>
+    <audio id="backgroundAudio" loop>
+      <source src="Joy.mp3" type="audio/mpeg" />
+      Your browser does not support the audio element.
+    </audio>
+    <div class="gif-container">
+      <img src="maxwell-cat.gif" alt="Looping GIF" id="catGif" />
+    </div>
+
+    <script>
+      const audio = document.getElementById("backgroundAudio");
+      const title = document.getElementById("title");
+      const catGif = document.getElementById("catGif");
+      const body = document.body;
+
+      catGif.addEventListener("click", function () {
+        if (audio.paused) {
+          audio.play();
+          title.textContent = "Party time!";
+          body.classList.add("disco");
+        } else {
+          audio.pause();
+          title.textContent = "Click the cat!";
+          body.classList.remove("disco");
+        }
+      });
+    </script>
+  </body>
+</html>
